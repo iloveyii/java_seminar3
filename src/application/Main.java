@@ -19,18 +19,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class Main extends Application  implements EventHandler<ActionEvent>{
+public class Main extends Application{
 	Stage window;
 	Scene scene1, scene2;
 	TextField txtEmail;
 	Button btn;
 	ListView<String> listView;
+	Label lblError;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			window = primaryStage;
-			window.setTitle("Switch scences");
+			window.setTitle("Register emails");
 			window.setOnCloseRequest(e -> {
 				e.consume();
 				closeProgram(window);
@@ -39,22 +40,23 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 			
 			// Form 
 			txtEmail = new TextField();
-			Button btnAdd = new Button("Add");
-			btnAdd.setOnMouseClicked(e -> btnAddClicked());
+			Button btnAdd = new Button("Register");
+			
 			
 			
 			// List View
 			listView = new ListView<>();
 			listView.getItems().addAll("AAA", "BBBB", "CCCCC");
-			listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+			listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 			
 			// Scene 1
 			Label label1 = new Label("Email : ");
 			Button btn1 = new Button("Goto scene 2");
+			lblError = new Label();
 			
 			
 			VBox layout1 = new VBox(10);
-			layout1.getChildren().addAll(label1, txtEmail, btnAdd, btn1);
+			layout1.getChildren().addAll(label1, txtEmail, lblError, btnAdd, btn1);
 			layout1.setPadding(new Insets(20,20,20,20));
 			Scene scene1 = new Scene(layout1, 800, 500);
 			
@@ -62,7 +64,7 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 			Label label2 = new Label("This is second scene");
 			Button btn2 = new Button("Goto scene 1");
 			Button btnRemove = new Button("Remove");
-			btnRemove.setOnMouseClicked(e -> btnRemoveClicked());
+			btnRemove.setOnAction(e -> btnRemoveClicked());
 
 			
 			VBox layout2 = new VBox(10);
@@ -72,6 +74,16 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 			
 			btn1.setOnAction(e -> window.setScene(scene2));
 			btn2.setOnAction(e -> window.setScene(scene1));
+			btnAdd.setOnAction(e -> {
+				boolean success = btnAddClicked();
+				if(success) {
+					lblError.setText("Email added");
+					txtEmail.setText("");
+					window.setScene(scene2);
+				} else {
+					lblError.setText("Email invalid");
+				}
+			});
 			window.setScene(scene1);
 			window.show();
 			
@@ -94,14 +106,21 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 		ObservableList<String> emails;
 		emails = listView.getSelectionModel().getSelectedItems();
 		
-		for(String email : emails) {
-			System.out.println(email);
-			
+		if(emails != null && emails.size() > 0) {
+			try {
+				for(String email : emails) {
+					System.out.println(email);
+					if(listView.getItems().contains(email)) {
+						listView.getItems().remove(email);
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 	
-	private void btnAddClicked() {
-		System.out.println("Btn click");
+	private boolean btnAddClicked() {
 		String email = txtEmail.getText();
 		// Validate
 		String regex = "^(.+)@(.+)$";
@@ -110,6 +129,12 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 	    boolean valid = matcher.matches() ? true :false;
 
 	    System.out.println("Email valid : " + valid);
+	    if(valid) {
+	    	listView.getItems().add(email);
+	    	return true;
+	    }
+	    
+	    return false;
         
 	}
 }
