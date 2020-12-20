@@ -27,3 +27,7 @@
 - To find path to this library, on a terminal `echo $JAVA_HOME`
 
 ## First FX program
+
+- A stage is the main window
+- A scene is the content area
+- A layout is need for placement of controls
