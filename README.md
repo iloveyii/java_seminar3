@@ -25,3 +25,5 @@
 - Click Run menu > Run Configurations > Click Arguments tab, and paste the following
   `--module-path "/home/alex/eclipse/javafx-sdk-11.0.2/lib" --add-modules javafx.controls`
 - To find path to this library, on a terminal `echo $JAVA_HOME`
+
+## First FX program
