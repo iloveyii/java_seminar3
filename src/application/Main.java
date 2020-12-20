@@ -22,6 +22,11 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 		try {
 			window = primaryStage;
 			window.setTitle("Switch scences");
+			window.setOnCloseRequest(e -> {
+				e.consume();
+				closeProgram(window);
+				
+			});
 			
 			// Scene 1
 			Label label1 = new Label("This is first scene");
@@ -38,7 +43,7 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 			
 			
 			StackPane layout2 = new StackPane();
-			layout2.getChildren().addAll(label2, btn2);
+			layout2.getChildren().add(btn2);
 			Scene scene2 = new Scene(layout2, 300, 200);
 			
 			btn1.setOnAction(e -> window.setScene(scene2));
@@ -54,5 +59,10 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public static void closeProgram(Stage window) {
+		System.out.println("Closing");
+		window.close();
 	}
 }
