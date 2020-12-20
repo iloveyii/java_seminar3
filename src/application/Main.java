@@ -2,20 +2,26 @@ package application;
 	
 import javafx.scene.control.Button;
 
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 
-public class Main extends Application {
+public class Main extends Application  implements EventHandler<ActionEvent>{
+	Button btn;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			primaryStage.setTitle("First Fx");
 						
-			Button btn = new Button("OK");
+			btn = new Button("OK");
+			btn.setOnAction(this);
 			StackPane layout = new StackPane();
 			layout.getChildren().addAll(btn);
 			
@@ -33,4 +39,18 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+	@Override
+	public void handle(ActionEvent event) {
+		if(event.getSource() == btn) {
+			System.out.println("Btn clicked");
+		} else {
+			System.out.println(event);
+		}
+		
+	}
+	
+	
+	
+	
 }
