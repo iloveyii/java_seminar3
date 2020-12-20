@@ -21,7 +21,7 @@ public class Main extends Application  implements EventHandler<ActionEvent>{
 			primaryStage.setTitle("First Fx");
 						
 			btn = new Button("OK");
-			btn.setOnAction(this);
+			btn.setOnAction(e -> System.out.println("Btn clicked from lambda"));
 			StackPane layout = new StackPane();
 			layout.getChildren().addAll(btn);
 			

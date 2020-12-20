@@ -31,3 +31,5 @@
 - A stage is the main window
 - A scene is the content area
 - A layout is need for placement of controls
+- Lambda function
+  `btn.setOnAction(e -> System.out.println("Btn clicked from lambda")); ``
