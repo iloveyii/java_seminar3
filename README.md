@@ -32,4 +32,4 @@
 - A scene is the content area
 - A layout is need for placement of controls
 - Lambda function
-  `btn.setOnAction(e -> System.out.println("Btn clicked from lambda")); ``
+  `btn.setOnAction(e -> System.out.println("Btn clicked from lambda")); `
