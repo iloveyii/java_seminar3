@@ -7,13 +7,9 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +27,11 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			window = primaryStage;
+			window.setFullScreen(false);
+			window.setMaximized(false);
+			window.centerOnScreen();
+			window.setResizable(false);
+			window.setOpacity(0.95);
 			window.setTitle("Register emails");
 			window.setOnCloseRequest(e -> {
 				e.consume();
@@ -42,8 +43,6 @@ public class Main extends Application{
 			txtEmail = new TextField();
 			Button btnAdd = new Button("Register");
 			
-			
-			
 			// List View
 			listView = new ListView<>();
 			listView.getItems().addAll("AAA", "BBBB", "CCCCC");
@@ -51,7 +50,7 @@ public class Main extends Application{
 			
 			// Scene 1
 			Label label1 = new Label("Email : ");
-			Button btn1 = new Button("Goto scene 2");
+			Button btn1 = new Button("Show list");
 			lblError = new Label();
 			
 			
@@ -60,9 +59,7 @@ public class Main extends Application{
 			layout1.setPadding(new Insets(20,20,20,20));
 			Scene scene1 = new Scene(layout1, 800, 500);
 			
-			// Scene 2
-			Label label2 = new Label("This is second scene");
-			Button btn2 = new Button("Goto scene 1");
+			Button btn2 = new Button("Back");
 			Button btnRemove = new Button("Remove");
 			btnRemove.setOnAction(e -> btnRemoveClicked());
 

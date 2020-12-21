@@ -1,5 +1,8 @@
 # JavaFx Tutorial
 
+A JavaFx application for registering emails.
+![screenshot]()
+
 ## Install
 
 ### Install plugin
